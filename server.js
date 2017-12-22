@@ -26,7 +26,7 @@ http.createServer(function(req,res){
 			}
 		})
 	}
-	else if(req.method=='POST'){
+	else if(pathname=='/signin.js'){
 		console.log('post have acceve!');
 		var dt='';
 		req.on('data',function(chunk){
@@ -34,7 +34,7 @@ http.createServer(function(req,res){
 		});
 		req.on('end',function(){
 			res.writeHead(200,{'Content-Type':'text/text'});
-			res.write(JSON.stringify(dt));
+			res.write(dt);
 			res.end();
 		});
 		// res.writeHead(200,{'Content-Type':'text/text'});
