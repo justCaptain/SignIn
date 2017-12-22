@@ -28,9 +28,18 @@ http.createServer(function(req,res){
 	}
 	else if(req.method=='POST'){
 		console.log('post have acceve!');
-		res.writeHead(200,{'Content-Type':'text/text'});
-		res.write(JSON.stringify(req));
-		res.end();
+		var dt='';
+		req.on('data',function(chunk){
+			dt+=chunk;
+		});
+		req.on('end',function(){
+			res.writeHead(200,{'Content-Type':'text/text'});
+			res.write(JSON.stringify(dt));
+			res.end();
+		});
+		// res.writeHead(200,{'Content-Type':'text/text'});
+		// res.write(JSON.stringify(req));
+		// res.end();
 	}
 	else{
 		console.log('404 Not Found !!!!');
