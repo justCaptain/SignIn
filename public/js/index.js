@@ -22,7 +22,7 @@ $(document).ready(function(){
                 password:login.children('input[name="password"]').val()
             },
             success:function(result){
-                $("#loginMsg").html(JSON.stringify(result));
+                $("#loginMsg").text(result.message);
             }
         });
     });
@@ -37,10 +37,12 @@ $(document).ready(function(){
                 repassword:register.children('input[name="repassword"]').val()
             },
             success:function(result){
+                $("#registerMsg").text(result.message);
                 if(result.code == 0){
-                    $("#registerMsg").html("注册成功");
-                }else{
-                    $("#registerMsg").html(result.message);
+                    setTimeout(function(){
+                        $("#login").css("display","block");
+                        $("#register").css("display","none")
+                    }, 2000);
                 }
             }
         });
