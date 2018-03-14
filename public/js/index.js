@@ -18,7 +18,7 @@ $(document).ready(function(){
             type:"POST",
             url:"/api/loginAuth",
             data:{
-                user:login.children('input[name="username"]').val(),
+                username:login.children('input[name="username"]').val(),
                 password:login.children('input[name="password"]').val()
             },
             success:function(result){
@@ -28,16 +28,21 @@ $(document).ready(function(){
     });
     $(".registerSubmit").click(function(){
         $.ajax({
-            type:"post",
+            type:"POST",
             url:"/api/registerAuth",
             dataType:"json",
             data:{
-                user:register.children('input[name="username"]').val(),
+                username:register.children('input[name="username"]').val(),
                 password:register.children('input[name="password"]').val(),
                 repassword:register.children('input[name="repassword"]').val()
             },
             success:function(result){
-                $("#registerMsg").html(JSON.stringify(result));
+                if(result.code == 0){
+                    $("#registerMsg").html("注册成功");
+                }else{
+                    $("#registerMsg").html(result.message);
+                }
+                
             }
         });
     });
